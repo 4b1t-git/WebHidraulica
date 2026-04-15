@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(py --version)",
+      "mcp__plugin_engram_engram__mem_save"
+    ]
+  }
+}
