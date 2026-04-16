@@ -169,7 +169,7 @@ img, svg { display: block; }
 .logo { display: flex; align-items: center; gap: 0; padding: 9px 20px; }
 
 .logo-nav {
-  height: 80px;
+  height: 120px;
   width: auto;
   border-radius: 4px;
   transform: translateY(-8px);
