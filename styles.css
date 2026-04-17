@@ -919,6 +919,8 @@ img, svg { display: block; }
   /* Slider */
   .slide-info { padding: 28px 24px; gap: 12px; }
   .slide-img { height: 220px; }
+  .slider-btn { top: 110px; transform: translateY(-50%); }
+  .slider-btn:hover { transform: translateY(-50%) scale(1.08); }
 
   /* Steps */
   .step { gap: 18px; }
