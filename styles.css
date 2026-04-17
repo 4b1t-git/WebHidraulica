@@ -889,7 +889,7 @@ img, svg { display: block; }
   .section-numbers { padding: 36px 0; }
 
   /* Hero */
-  .hero { padding: 60px 20px 30px; }
+  .hero { padding: 90px 20px 30px; }
   .hero-layout { flex-direction: column; gap: 48px; }
   .hero-content { text-align: center; margin: 0 auto; }
   .hero-quick-contact { flex: 1; width: 100%; max-width: 400px; margin: 0 auto; }
