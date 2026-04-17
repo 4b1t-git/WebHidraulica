@@ -873,7 +873,7 @@ img, svg { display: block; }
   .numbers-grid { justify-content: center; gap: 32px; }
   .slide { grid-template-columns: 1fr; }
   .slide-img    { height: 280px; }
-  .logo-nav { height: 24px; transform: translateY(0); }
+  .logo-nav { height: 90px; transform: translateY(0); }
   .logo { padding: 4px 10px; }
   .nav-cta { padding: 6px 14px; font-size: 0.72rem; }
 }
@@ -911,7 +911,7 @@ img, svg { display: block; }
   }
 
   /* Logo mobile */
-  .logo-nav { height: 25px; transform: translateY(-6px); }
+  .logo-nav { height: 100px; transform: translateY(-4px); }
   .logo { padding: 0; overflow: visible; }
   .nav-inner { overflow: visible; }
   .nav-cta { margin-top: -6px; }
