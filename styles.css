@@ -181,6 +181,11 @@ img, svg { display: block; }
   overflow: visible;
 }
 
+.nav-logo, .nav-cta-wrap { flex: 1; display: flex; }
+.nav-logo { justify-content: flex-start; }
+.nav-cta-wrap { justify-content: flex-end; }
+.nav-links { flex: 0 0 auto; }
+
 
 .nav-links { display: flex; gap: 32px; }
 .nav-links a { font-size: 0.82rem; color: var(--text-secondary); transition: color var(--transition); }
