@@ -25,6 +25,8 @@
   ───────────────────────────────────── */
   const navbar = document.getElementById('navbar');
 
+  // Apply glass immediately on load (not just on scroll)
+  navbar.classList.toggle('scrolled', window.scrollY > 30);
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 30);
   }, { passive: true });
@@ -42,6 +44,7 @@
   let position      = 1;
   let autoTimer     = null;
   let isAnimating   = false;   // guard: block calls mid-transition
+  let isHovering    = false;   // track hover so visibilitychange doesn't restart auto while hovering
 
   if (track && total > 0) {
     // Clone first + last for seamless wrap
@@ -125,13 +128,18 @@
     });
 
     if (wrapper) {
-      wrapper.addEventListener('mouseenter', stopAuto);
-      wrapper.addEventListener('mouseleave', startAuto);
+      wrapper.addEventListener('mouseenter', () => { isHovering = true;  stopAuto();  });
+      wrapper.addEventListener('mouseleave', () => { isHovering = false; startAuto(); });
     }
 
+    let resizeTimer = null;
     window.addEventListener('resize', () => {
-      setSlideSizes();
-      goTo(position, false);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        isAnimating = false;
+        setSlideSizes();
+        goTo(position, false);
+      }, 100);
     }, { passive: true });
 
     // FIX 3: Page Visibility API — pause when tab is hidden,
@@ -142,7 +150,7 @@
       } else {
         // reset animation state in case a transition was cut off
         isAnimating = false;
-        startAuto();
+        if (!isHovering) startAuto();
       }
     });
 

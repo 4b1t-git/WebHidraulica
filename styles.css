@@ -873,8 +873,8 @@ img, svg { display: block; }
   .numbers-grid { justify-content: center; gap: 32px; }
   .slide { grid-template-columns: 1fr; }
   .slide-img    { height: 280px; }
-  .logo-nav { height: 90px; transform: translateY(0); }
-  .logo { padding: 4px 10px; }
+  .logo-nav { height: 52px; transform: translateY(0); }
+  .logo { padding: 4px 8px; }
   .nav-cta { padding: 6px 14px; font-size: 0.72rem; }
 }
 
@@ -911,10 +911,10 @@ img, svg { display: block; }
   }
 
   /* Logo mobile */
-  .logo-nav { height: 100px; transform: translateY(-4px); }
-  .logo { padding: 0; overflow: visible; }
-  .nav-inner { overflow: visible; }
-  .nav-cta { margin-top: -6px; }
+  .logo-nav { height: 60px; transform: translateY(0); }
+  .logo { padding: 0 8px; }
+  .nav-inner { padding: 8px 16px; overflow: hidden; }
+  .nav-cta { margin-top: 0; }
 
   /* Slider */
   .slide-info { padding: 28px 24px; gap: 12px; }
