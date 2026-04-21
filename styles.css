@@ -426,18 +426,14 @@ img, svg { display: block; }
   transition: transform 0.5s ease;
 }
 
-/* Placeholder gradients — replace background with url('fotos/foto1.jpg') */
 .slide-img--1 {
-  background:
-    linear-gradient(160deg, #0f2040 0%, #1a3a6a 40%, #0d1e40 100%);
+  background: url('images/Hidraulic hose.webp') center/cover no-repeat;
 }
 .slide-img--2 {
-  background:
-    linear-gradient(160deg, #1a1205 0%, #3a2400 40%, #1e1400 100%);
+  background: url('images/niples.avif') center/cover no-repeat;
 }
 .slide-img--3 {
-  background:
-    linear-gradient(160deg, #0a1825 0%, #0e2540 40%, #091520 100%);
+  background: url('images/sellos,cilindro.jpg') center/cover no-repeat;
 }
 .slide-img--4 {
   background:
@@ -452,27 +448,7 @@ img, svg { display: block; }
     linear-gradient(160deg, #101008 0%, #222200 40%, #121200 100%);
 }
 
-/* subtle geometric texture on placeholders */
-.slide-img::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
 
-/* "FOTO PRÓXIMAMENTE" watermark on placeholders */
-.slide-img::after {
-  content: 'FOTO PRÓXIMAMENTE';
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-head);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: rgba(255,255,255,0.08);
-}
 
 .slide-info {
   background: var(--bg-card);
