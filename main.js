@@ -43,6 +43,7 @@
   const total       = origSlides.length;
   let position      = 1;
   let autoTimer     = null;
+  let safetyTimer   = null;
   let isAnimating   = false;   // guard: block calls mid-transition
   let isHovering    = false;   // track hover so visibilitychange doesn't restart auto while hovering
 
@@ -74,22 +75,31 @@
       // FIX 1: ignore calls while a transition is already running
       if (animated && isAnimating) return;
 
-      track.style.transition = animated
-        ? 'transform 0.6s cubic-bezier(0.4,0,0.2,1)'
-        : 'none';
+      const gap = 24;
 
-      if (animated) isAnimating = true;
+      if (animated) {
+        clearTimeout(safetyTimer);
+        track.style.transition = 'transform 0.6s cubic-bezier(0.4,0,0.2,1)';
+        // FIX 4: flush transition BEFORE changing transform so browsers don't batch
+        // them as a single instant update (critical after a transition:none jump)
+        void track.offsetHeight;
+        isAnimating = true;
+        // FIX 5: safety net — if transitionend never fires (hidden tab, throttle,
+        // same-position call) reset the guard so the slider doesn't freeze forever
+        safetyTimer = setTimeout(() => { isAnimating = false; }, 900);
+      } else {
+        track.style.transition = 'none';
+      }
 
       position = idx;
-      const gap = 24;
       track.style.transform = `translateX(-${position * (wrapper.clientWidth + gap)}px)`;
-      
+
       // Force a reflow when not animating so the 'none' transition is applied immediately
       // This prevents visual glitches on wrap-around
       if (!animated) {
         void track.offsetHeight;
       }
-      
+
       updateDots();
     }
 
@@ -97,6 +107,8 @@
     // only for the 'transform' property (avoids child-element ghost events)
     track.addEventListener('transitionend', (e) => {
       if (e.target !== track || e.propertyName !== 'transform') return;
+
+      clearTimeout(safetyTimer);
 
       if (position === 0) {
         goTo(total, false);          // clone of last → real last
@@ -122,7 +134,9 @@
 
     dots.forEach((dot) => {
       dot.addEventListener('click', () => {
-        goTo(parseInt(dot.dataset.idx, 10) + 1);
+        const idx = parseInt(dot.dataset.idx, 10);
+        if (isNaN(idx)) return;
+        goTo(idx + 1);
         startAuto();
       });
     });
@@ -177,8 +191,7 @@
      · Aparece altiro al cargar
      · Se oculta cuando la sección de contacto es visible
   ───────────────────────────────────── */
-  const waBubble     = document.getElementById('wa-bubble');
-  let contactVisible = false;
+  const waBubble = document.getElementById('wa-bubble');
 
   // 1) Aparece altiro al cargar la página
   if (waBubble) {
@@ -190,8 +203,7 @@
   if (contactSection && waBubble) {
     const contactObserver = new IntersectionObserver(
       ([entry]) => {
-        contactVisible = entry.isIntersecting;
-        if (contactVisible) {
+        if (entry.isIntersecting) {
           waBubble.classList.add('wa-hidden');
         } else {
           waBubble.classList.remove('wa-hidden');

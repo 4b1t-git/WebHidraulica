@@ -399,6 +399,10 @@ img, svg { display: block; }
   border-radius: var(--radius);
   transform: translateZ(0); /* FIX overflow hidden bugs on Safari */
 }
+/* Preserve the Safari translateZ(0) after .reveal.visible overrides the transform */
+.slider-wrapper.reveal.visible {
+  transform: translateZ(0);
+}
 
 .slider-track {
   display: flex;
@@ -852,6 +856,25 @@ img, svg { display: block; }
   .logo-nav { height: 52px; transform: translateY(0); }
   .logo { padding: 4px 8px; }
   .nav-cta { padding: 6px 14px; font-size: 0.72rem; }
+}
+
+/* ─────────────────────────────────────────
+   REDUCED MOTION
+───────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .reveal.reveal-delay-1,
+  .reveal.reveal-delay-2,
+  .reveal.reveal-delay-3,
+  .reveal.reveal-delay-4 { transition-delay: 0s; }
+  .slider-track { transition: none !important; }
+  .scroll-line { animation: none; opacity: 0.5; }
+  .wa-bubble.visible::before { animation: none; }
+  .card, .value-card, .mv-card, .btn, .btn-primary, .btn-whatsapp { transition: none; }
 }
 
 /* ── MOBILE ≤ 600px ── */
