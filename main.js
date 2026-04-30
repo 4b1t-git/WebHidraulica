@@ -48,6 +48,10 @@
   let isHovering    = false;   // track hover so visibilitychange doesn't restart auto while hovering
 
   if (track && total > 0) {
+    // Force slider visible immediately — don't depend on IntersectionObserver
+    // (avoids edge cases where observer never fires and slider stays opacity:0)
+    if (wrapper) wrapper.classList.add('visible');
+
     // Clone first + last for seamless wrap
     // Layout: [clone-last | slide0…slideN-1 | clone-first]
     // Positions:    0     |   1  …  total   |   total+1
@@ -76,9 +80,9 @@
       if (animated && isAnimating) return;
 
       const gap = 24;
+      clearTimeout(safetyTimer);
 
       if (animated) {
-        clearTimeout(safetyTimer);
         track.style.transition = 'transform 0.6s cubic-bezier(0.4,0,0.2,1)';
         // FIX 4: flush transition BEFORE changing transform so browsers don't batch
         // them as a single instant update (critical after a transition:none jump)
@@ -180,10 +184,13 @@
       startAuto();
     }, { passive: true });
 
-    // Init
-    setSlideSizes();
-    goTo(1, false);
-    startAuto();
+    // Init — defer to next frame so layout is fully resolved
+    // (prevents zero-width slides if browser hasn't painted yet)
+    requestAnimationFrame(() => {
+      setSlideSizes();
+      goTo(1, false);
+      startAuto();
+    });
   }
 
   /* ─────────────────────────────────────
@@ -234,8 +241,7 @@
         `Tel%C3%A9fono%3A%20${encodeURIComponent(tel)}%0A%0A` +
         `${encodeURIComponent(mensaje)}`;
 
-      // ⚠ Reemplazá 5491100000000 con el número real
-      window.open(`https://wa.me/5491100000000?text=${text}`, '_blank');
+      window.open(`https://wa.me/56995760358?text=${text}`, '_blank');
 
       const btn = document.getElementById('submit-btn');
       const original = btn.textContent;
