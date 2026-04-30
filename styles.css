@@ -476,13 +476,13 @@ img, svg { display: block; }
 }
 
 .slide-img--1 {
-  background: url('images/Hidraulic hose.webp') center/cover no-repeat;
+  background: url('images/reemplazomangueras.png') center/cover no-repeat;
 }
 .slide-img--2 {
-  background: url('images/niples.avif') center/cover no-repeat;
+  background: url('images/rbflexNiples.png') center/cover no-repeat;
 }
 .slide-img--3 {
-  background: url('images/sellos,cilindro.jpg') center/cover no-repeat;
+  background: url('images/cambiojuntastoricas.png') center/cover no-repeat;
 }
 .slide-img--4 {
   background:
@@ -710,6 +710,15 @@ img, svg { display: block; }
 }
 .contact-form { display: flex; flex-direction: column; gap: 18px; }
 .contact-form #submit-btn { margin-top: 18px; }
+.form-feedback {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-top: 6px;
+  min-height: 1.2em;
+  color: var(--text-secondary);
+}
+.form-feedback--ok { color: var(--wa-green); }
+.form-feedback--err { color: #ea4335; }
 .field-group { display: flex; flex-direction: column; gap: 6px; }
 .field-group label {
   font-size: 0.78rem; color: var(--text-secondary);

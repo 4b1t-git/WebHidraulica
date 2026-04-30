@@ -222,37 +222,78 @@
   }
 
   /* ─────────────────────────────────────
-     CONTACT FORM — pre-filled WA link
+     CONTACT FORM — Web3Forms email submit
   ───────────────────────────────────── */
+  const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
   const form = document.getElementById('contact-form');
 
   if (form) {
-    form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
+
+      const btn = document.getElementById('submit-btn');
+      const feedback = document.getElementById('form-feedback');
+      const original = btn.textContent;
 
       const nombre  = document.getElementById('nombre').value.trim();
       const empresa = document.getElementById('empresa').value.trim();
+      const email   = document.getElementById('email').value.trim();
       const tel     = document.getElementById('tel').value.trim();
       const mensaje = document.getElementById('mensaje').value.trim();
 
-      const empresaStr = empresa ? `%20(${encodeURIComponent(empresa)})` : '';
-      const text =
-        `Hola%2C%20soy%20${encodeURIComponent(nombre)}${empresaStr}.%0A` +
-        `Tel%C3%A9fono%3A%20${encodeURIComponent(tel)}%0A%0A` +
-        `${encodeURIComponent(mensaje)}`;
+      const subject = email
+        ? `Nueva consulta de ${nombre} — RB Flex`
+        : `⚠ SIN EMAIL — RESPONDER POR TELÉFONO — Consulta de ${nombre}`;
 
-      window.open(`https://wa.me/56995760358?text=${text}`, '_blank');
+      const payload = {
+        access_key: WEB3FORMS_KEY,
+        subject,
+        from_name: 'Formulario RB Flex',
+        nombre,
+        empresa: empresa || '(no indicada)',
+        email: email || '(no indicado — responder por teléfono/WhatsApp)',
+        telefono: tel,
+        mensaje,
+        replyto: email || 'contacto@rb-flex.com',
+        botcheck: ''
+      };
 
-      const btn = document.getElementById('submit-btn');
-      const original = btn.textContent;
-      btn.textContent = '¡Enviado! Redirigiendo a WhatsApp…';
+      btn.textContent = 'Enviando…';
       btn.disabled = true; btn.style.opacity = '0.7';
+      feedback.textContent = '';
+      feedback.className = 'form-feedback';
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          btn.textContent = '¡Consulta enviada!';
+          feedback.textContent = 'Recibiremos tu mensaje y te contactaremos pronto.';
+          feedback.className = 'form-feedback form-feedback--ok';
+          form.reset();
+        } else {
+          throw new Error(data.message || 'Error desconocido');
+        }
+      } catch (err) {
+        btn.textContent = original;
+        btn.disabled = false; btn.style.opacity = '';
+        feedback.textContent = 'No se pudo enviar. Intenta de nuevo o contáctanos por WhatsApp.';
+        feedback.className = 'form-feedback form-feedback--err';
+        return;
+      }
 
       setTimeout(() => {
         btn.textContent = original;
         btn.disabled = false; btn.style.opacity = '';
-        form.reset();
-      }, 3500);
+      }, 4000);
     });
   }
 
@@ -279,5 +320,16 @@
   );
 
   sections.forEach((s) => secObserver.observe(s));
+
+  /* ─────────────────────────────────────────
+     TEL LINKS — only trigger dialer on mobile/touch
+  ───────────────────────────────────────── */
+  const isMobile = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  if (!isMobile) {
+    document.querySelectorAll('a[href^="tel:"]').forEach((a) => {
+      a.addEventListener('click', (e) => e.preventDefault());
+      a.style.cursor = 'default';
+    });
+  }
 
 })();
