@@ -1040,7 +1040,7 @@ section[id] { scroll-margin-top: 100px; }
   .slide-img    { height: 280px; }
   .slider-btn { top: 140px; transform: translateY(-50%); }
   .slider-btn:hover { transform: translateY(-50%) scale(1.08); }
-  .logo-nav { height: 52px; transform: translateY(0); }
+  .logo-nav { height: 90px; transform: translateY(0); }
   .logo { padding: 4px 8px; }
   .nav-cta { padding: 6px 14px; font-size: 0.72rem; }
 }
