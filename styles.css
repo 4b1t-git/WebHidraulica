@@ -1024,15 +1024,6 @@ section[id] { scroll-margin-top: 100px; }
   .values-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* ── TABLET (touch device, 901–1499px) ── */
-@media (min-width: 901px) and (max-width: 1499px) and (pointer: coarse) {
-  .logo-nav { height: 72px; transform: translateY(-2px); }
-  .logo { padding: 6px 12px; }
-  .nav-inner { padding: 6px clamp(20px, 3vw, 40px); gap: 20px; }
-  .nav-links { gap: 20px; }
-  .nav-cta { padding: 8px 16px; font-size: 0.75rem; }
-}
-
 /* ── TABLET / SMALL DESKTOP ≤ 900px ── */
 @media (max-width: 900px) {
   .cards-grid { grid-template-columns: repeat(2, 1fr); }
