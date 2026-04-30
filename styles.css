@@ -64,9 +64,9 @@ img, svg { display: block; }
   margin: 0 auto;
   padding: 0 clamp(24px, 5vw, 80px);
 }
-.section { padding: 100px 0; position: relative; scroll-margin-top: 90px; }
+.section { padding: 100px 0; position: relative; scroll-margin-top: 100px; }
 .section-dark { background: var(--bg-2); }
-section[id] { scroll-margin-top: 90px; }
+section[id] { scroll-margin-top: 100px; }
 
 .section-header { text-align: center; margin-bottom: 60px; }
 .section-header h2 {
@@ -1065,7 +1065,7 @@ section[id] { scroll-margin-top: 90px; }
   .section-numbers { padding: 36px 0; }
 
   /* Hero */
-  .hero { padding: 90px 20px 30px; }
+  .hero { padding: 120px 20px 30px; }
   .hero-layout { flex-direction: column; gap: 48px; }
   .hero-content { text-align: center; margin: 0 auto; }
   .hero-quick-contact { flex: 1; width: 100%; max-width: 400px; margin: 0 auto; }
@@ -1088,12 +1088,14 @@ section[id] { scroll-margin-top: 90px; }
 
   /* Logo mobile */
   .logo-nav {
-    height: 52px;
+    height: 80px;
     max-width: 100%;
+    width: auto;
     object-fit: contain;
+    object-position: left center;
     transform: translateY(0);
   }
-  .logo { padding: 0 4px; }
+  .logo { padding: 0 4px; display: block; max-width: 100%; }
   .nav-logo { flex: 1 1 auto; min-width: 0; overflow: hidden; }
   .nav-cta-wrap { flex: 0 0 auto; }
   .nav-inner { padding: 4px 10px; overflow: hidden; gap: 8px; }
