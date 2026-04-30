@@ -253,7 +253,9 @@ section[id] { scroll-margin-top: 100px; }
   text-transform: uppercase;
 }
 .q-phone {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-head);
   font-size: clamp(1.3rem, 2vw, 1.6rem);
   font-weight: 700;
@@ -261,6 +263,15 @@ section[id] { scroll-margin-top: 100px; }
   margin-bottom: 4px;
   transition: color var(--transition);
   white-space: nowrap;
+}
+.q-phone-icon {
+  flex-shrink: 0;
+  color: var(--accent);
+  transition: color var(--transition), transform var(--transition);
+}
+.q-phone:hover .q-phone-icon {
+  color: var(--accent-2);
+  transform: rotate(-12deg);
 }
 .q-phone + .q-phone { margin-bottom: 8px; }
 .q-phone:hover { color: #fff; }
