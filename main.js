@@ -151,14 +151,26 @@
     }
 
     let resizeTimer = null;
-    window.addEventListener('resize', () => {
+    const reflow = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
+        if (!wrapper.clientWidth) return;
         isAnimating = false;
         setSlideSizes();
         goTo(position, false);
-      }, 100);
-    }, { passive: true });
+      }, 60);
+    };
+    window.addEventListener('resize', reflow, { passive: true });
+
+    // ResizeObserver — catches first non-zero layout (fonts/images late) and any
+    // later container resize (orientation change, devtools open, parent reflow).
+    // Fixes "slider sometimes invisible" bug: prior init used a single rAF and
+    // could read clientWidth=0 before parent had laid out.
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(reflow);
+      ro.observe(wrapper);
+    }
+    window.addEventListener('load', reflow);
 
     // FIX 3: Page Visibility API — pause when tab is hidden,
     // resume when it comes back. Prevents timer queue buildup.
@@ -184,8 +196,9 @@
       startAuto();
     }, { passive: true });
 
-    // Init — defer to next frame so layout is fully resolved
-    // (prevents zero-width slides if browser hasn't painted yet)
+    // Init — defer to next frame so layout is fully resolved.
+    // If wrapper width is still 0 (fonts/images pending), ResizeObserver +
+    // load handler above will re-run sizing once the real width arrives.
     requestAnimationFrame(() => {
       setSlideSizes();
       goTo(1, false);
