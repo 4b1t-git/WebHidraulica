@@ -1024,8 +1024,8 @@ section[id] { scroll-margin-top: 100px; }
   .values-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* ── TABLET / MEDIUM DESKTOP 901–1299px ── */
-@media (min-width: 901px) and (max-width: 1299px) {
+/* ── TABLET (touch device, 901–1499px) ── */
+@media (min-width: 901px) and (max-width: 1499px) and (hover: none) and (pointer: coarse) {
   .logo-nav { height: 72px; transform: translateY(-2px); }
   .logo { padding: 6px 12px; }
   .nav-inner { padding: 6px clamp(20px, 3vw, 40px); gap: 20px; }
