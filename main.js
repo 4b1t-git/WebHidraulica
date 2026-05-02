@@ -237,7 +237,7 @@
   /* ─────────────────────────────────────
      CONTACT FORM — Web3Forms email submit
   ───────────────────────────────────── */
-  const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
+  const WEB3FORMS_KEY = '7bb8860c-ef86-4417-8e6c-6ef21226ae2b';
   const form = document.getElementById('contact-form');
 
   if (form) {
