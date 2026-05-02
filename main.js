@@ -264,12 +264,15 @@
         from_name: 'Formulario RB Flex',
         nombre,
         empresa: empresa || '(no indicada)',
-        email: email || '(no indicado — responder por teléfono/WhatsApp)',
+        email_contacto: email || '(no indicado — responder por teléfono/WhatsApp)',
         telefono: tel,
         mensaje,
-        replyto: email || 'contacto@rb-flex.com',
         botcheck: ''
       };
+      if (email) {
+        payload.email = email;
+        payload.replyto = email;
+      }
 
       btn.textContent = 'Enviando…';
       btn.disabled = true; btn.style.opacity = '0.7';
@@ -296,6 +299,7 @@
           throw new Error(data.message || 'Error desconocido');
         }
       } catch (err) {
+        console.error('Web3Forms submit error:', err);
         btn.textContent = original;
         btn.disabled = false; btn.style.opacity = '';
         feedback.textContent = 'No se pudo enviar. Intenta de nuevo o contáctanos por WhatsApp.';
