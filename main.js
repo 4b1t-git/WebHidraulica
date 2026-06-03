@@ -338,6 +338,20 @@
 
   sections.forEach((s) => secObserver.observe(s));
 
+  /* ─────────────────────────────────────
+     ANCHOR LINKS — scroll sin cambiar la URL
+  ───────────────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
   /* ─────────────────────────────────────────
      TEL LINKS — only trigger dialer on mobile/touch
   ───────────────────────────────────────── */
