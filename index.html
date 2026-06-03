@@ -248,6 +248,7 @@
                   src="https://maps.google.com/maps?q=-35.0643010,-71.1740284&hl=es&z=17&output=embed"
                   width="100%" height="140" style="border:0;" allowfullscreen="" loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"
+                  sandbox="allow-scripts allow-same-origin"
                   title="Mapa Calle 30 de julio"></iframe>
                 <a class="map-overlay-link map-overlay-link--sm"
                    href="https://www.google.com/maps/dir/?api=1&destination=-35.0643010,-71.1740284"
@@ -497,6 +498,7 @@
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
+          sandbox="allow-scripts allow-same-origin"
           title="Ubicación de RB Flex"
           aria-label="Mapa de ubicación de RB Flex"
         ></iframe>
@@ -577,6 +579,12 @@
               <label for="mensaje">Descripción del problema</label>
               <textarea id="mensaje" name="mensaje" rows="4" placeholder="Describe brevemente el equipo y el problema que presenta…" required></textarea>
             </div>
+            <div class="field-group consent-group">
+              <label class="consent-label">
+                <input type="checkbox" id="consent" name="consent" required />
+                <span>He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener noreferrer">Política de Privacidad</a>. Autorizo el uso de mis datos para responder mi consulta.</span>
+              </label>
+            </div>
             <button type="submit" class="btn btn-primary full-width" id="submit-btn">Enviar consulta al correo</button>
             <p id="form-feedback" class="form-feedback" role="status" aria-live="polite"></p>
           </form>
@@ -640,6 +648,7 @@
         <a href="#servicios">Servicios</a>
         <a href="#trabajos">Trabajos</a>
         <a href="#contacto">Contacto</a>
+        <a href="privacidad.html">Privacidad</a>
       </nav>
     </div>
   </footer>

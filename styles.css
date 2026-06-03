@@ -953,6 +953,27 @@ section[id] { scroll-margin-top: 100px; }
 .footer-inner {
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
 }
+.consent-group { margin-top: 4px; }
+.consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  line-height: 1.5;
+}
+.consent-label input[type="checkbox"] {
+  margin-top: 2px;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.consent-label a { color: var(--accent); text-decoration: underline; }
+.consent-label a:hover { color: var(--accent-2); }
+
 .footer-copy { font-size: 0.78rem; color: var(--text-muted); }
 .footer-links { display: flex; gap: 24px; }
 .footer-links a { font-size: 0.78rem; color: var(--text-muted); transition: color var(--transition); }
